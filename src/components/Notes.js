@@ -18,7 +18,8 @@ class Notes extends React.Component {
     console.log(this.state.noteInput);
   };
 
-  handleAddNote = () => {
+  handleAddNote = (event) => {
+    event.preventDefault();
     this.setState({
       notes: [...this.state.notes, this.state.noteInput],
       noteInput: "",
@@ -49,11 +50,13 @@ class Notes extends React.Component {
     return (
       <div className="notes">
         <h2>Notes</h2>
-        <textarea
-          value={this.state.noteInput}
-          onChange={this.handleNoteInput}
-        />
-        <button onClick={this.handleAddNote}>Add note</button>
+        <form onSubmit={this.handleAddNote}>
+          <textarea
+            value={this.state.noteInput}
+            onChange={this.handleNoteInput}
+          />
+          <button>Add note</button>
+        </form>
         <div className="note-container">{notesToDisplay}</div>
       </div>
     );
